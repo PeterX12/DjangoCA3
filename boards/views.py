@@ -8,9 +8,5 @@ def home(request):
     return render(request, 'home.html', {'boards':boards})
 
 def board_topics(request, pk):
-    #board = get_object_or_404(Boards, pk=pk)
-    try:
-        board = Board.objects.get(pk=pk)
-    except Board.DoesNotExist:
-        raise Http404
+    board = get_object_or_404(Board, pk=pk)
     return render(request, 'topics.html', {'board': board})
