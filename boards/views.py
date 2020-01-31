@@ -4,6 +4,7 @@ from .models import Board, Topic, Post
 from .forms import NewTopicForm
 
 
+
 def home(request):
     boards = Board.objects.all()
     return render(request, 'home.html', {'boards': boards})
@@ -31,7 +32,6 @@ def new_topic(request, pk):
     else:
         form = NewTopicForm()
     return render(request, 'new_topic.html', {'board': board, 'form': form})
-
 
     
 #def board_topics(request, pk):
