@@ -1,10 +1,10 @@
 from django.urls import resolve, reverse
 from django.test import TestCase
-from .views import home, board_topics, new_topic
 from django.contrib.auth.models import User
-from .models import Board, Topic, Post
-from .forms import NewTopicForm
 from django.test import TestCase
+from ..views import home, board_topics, new_topic
+from ..models import Board, Topic, Post
+from ..forms import NewTopicForm
 
 class HomeTests(TestCase):
     def setUp(self):
@@ -26,7 +26,7 @@ class HomeTests(TestCase):
 class BoardTopicsTests(TestCase):
     def setUp(self):
         Board.objects.create(name='Django', description='Django board.')
-        
+
     def test_board_topics_view_success_status_code(self):
         url = reverse('board_topics', kwargs={'pk': 1})
         response = self.client.get(url)
@@ -60,7 +60,7 @@ class BoardTopicsTests(TestCase):
 class NewTopicTests(TestCase):
     def setUp(self):
         Board.objects.create(name='Django', description='Django board.')
-        User.objects.create_user(username='john', email='john@doe.com', password='123')
+        User.objects.create_user(username='john', email='john@doe.com', password='123')  # <- included this line here
 
     def test_new_topic_view_success_status_code(self):
         url = reverse('new_topic', kwargs={'pk': 1})
@@ -80,7 +80,7 @@ class NewTopicTests(TestCase):
         new_topic_url = reverse('new_topic', kwargs={'pk': 1})
         board_topics_url = reverse('board_topics', kwargs={'pk': 1})
         response = self.client.get(new_topic_url)
-        self.assertContains(response, 'href="{0}"'.format(board_topics_url))
+        self.assertContains(response, 'href="{0}"'.format(board_topics_url))s
         
     def test_csrf(self):
         url = reverse('new_topic', kwargs={'pk': 1})

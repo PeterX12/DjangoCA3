@@ -1,7 +1,9 @@
 from django.urls import resolve, reverse
-from django.test import TestCase
 from django.contrib.auth.forms import UserCreationForm
+from django.test import TestCase
 from django.contrib.auth.models import User
+from django.test import TestCase
+
 from ..views import signup
 from ..forms import SignUpForm
 
@@ -19,7 +21,7 @@ class SignUpTests(TestCase):
 
     def test_csrf(self):
         self.assertContains(self.response, 'csrfmiddlewaretoken')
-        
+
     def test_contains_form(self):
         form = self.response.context.get('form')
         self.assertIsInstance(form, SignUpForm)
