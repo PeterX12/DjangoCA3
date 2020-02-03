@@ -124,7 +124,7 @@ class PasswordResetConfirmTests(TestCase):
 class InvalidPasswordResetConfirmTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123abcdef')
-        self.uid = urlsafe_base64_encode(force_bytes(user.pk))
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
 
         '''
@@ -133,7 +133,7 @@ class InvalidPasswordResetConfirmTests(TestCase):
         user.set_password('abcdef123')
         user.save()
 
-        url = reverse('password_reset_confirm', kwargs={'uidb64': self.uid, 'token': token})
+        url = reverse('password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
         self.response = self.client.get(url)
 
     def test_status_code(self):
