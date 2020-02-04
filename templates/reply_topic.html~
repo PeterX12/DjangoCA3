@@ -20,8 +20,8 @@ var simplemde = new SimpleMDE();
 <form method="post" class="mb-4" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
-    <button type="submit" class="btn btn-success">Post a reply</button>
-  </form>
+<button type="submit" class="btn btn-success">Post a reply</button>
+</form>
   {% for post in topic.posts.all %}
 <div class="card mb-2">
 <div class="card-body p-3">
